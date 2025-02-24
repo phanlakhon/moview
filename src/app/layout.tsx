@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${anuphan.variable} font-sans`}>{children}</body>
+      <body suppressHydrationWarning={true} className={`${anuphan.variable} font-sans`}>
+        <div className="container mx-auto">{children}</div>
+      </body>
     </html>
   );
 }

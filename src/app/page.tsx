@@ -1,11 +1,11 @@
-import Reviews from "@/components/review";
-import AddReview from "@/components/review/add-review";
+import { FeatureHome } from "@/features";
 
 export default function Home() {
   return (
     <div>
-      <AddReview />
-      <Reviews />
+      <FeatureHome />
+      {/* <AddReview />
+      <Reviews /> */}
     </div>
   );
 }
