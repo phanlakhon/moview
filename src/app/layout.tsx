@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={`${anuphan.variable} font-sans`}>
-        <div className="container mx-auto">{children}</div>
+        <div className="container xl:max-w-[950px] mx-auto">{children}</div>
       </body>
     </html>
   );

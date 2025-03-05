@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { Divider } from "../Dividers";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
-import { Skeleton } from "../ui/skeleton";
-import { SkeletonMovieList } from "../Skeletons";
-export default function MovieLists() {
+import Divider from "../dividers/Default";
+import SkeletonMovieList from "../skeletons/MovieList";
+
+interface MovieListProps {
+  items: any;
+}
+export default function MovieLists({ items }: MovieListProps) {
   const [isClientLoaded, setIsClientLoaded] = useState(false);
 
   useEffect(() => {
@@ -22,31 +25,32 @@ export default function MovieLists() {
       <Divider />
 
       <div className="grid grid-cols-7 gap-4 mt-6 mb-10">
-        {Array.from(
-          [1, 2, 3, 4, 5, 6, 7].map((number, index) => (
+        {items.map((item: any, index: number) => {
+          return (
             <Fragment key={index}>
               {!isClientLoaded ? (
                 <SkeletonMovieList />
               ) : (
                 <Link className="group transition duration-30" key={index} href={"/"}>
-                  <div className="relative w-full overflow-hidden rounded-md">
+                  <div className="relative w-full overflow-hidden rounded-sm">
                     <div className="relative w-full" style={{ paddingBottom: "145.6%" }}>
                       <Image
-                        src={`https://loremflickr.com/200/200?random=${Math.floor(Math.random() * 100)}`}
-                        alt="Picture of the author"
+                        // src={`https://loremflickr.com/200/200?random=${Math.floor(Math.random() * 100)}`}
+                        src={item.imageURL}
+                        alt={item.name}
                         width={237}
                         height={244}
-                        className="absolute top-0 left-0 w-full h-full object-cover rounded-md animate-fade-in block scale-100 transform object-center transition duration-500"
+                        className="absolute top-0 left-0 w-full h-full object-cover rounded-sm animate-fade-in block scale-100 transform object-center transition duration-500"
                       />
                     </div>
                   </div>
 
-                  <p className="mt-2 group-hover:text-white/50">For Movie Name</p>
+                  <p className="mt-2 text-sm group-hover:text-white/50">{item.name}</p>
                 </Link>
               )}
             </Fragment>
-          ))
-        )}
+          );
+        })}
       </div>
     </div>
   );
